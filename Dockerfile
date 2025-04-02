@@ -31,7 +31,8 @@ RUN npm ci
 
 COPY . .
 ENV APP_BUILD_HASH=${BUILD_HASH}
-RUN npm run build
+ENV GENERATE_SOURCEMAP=false
+RUN NODE_OPTIONS=--max-old-space-size=7000 npm run build
 
 ######## WebUI backend ########
 FROM python:3.11-slim-bookworm AS base
